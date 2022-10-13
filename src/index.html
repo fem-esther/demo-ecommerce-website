@@ -1,0 +1,876 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../dist/output.css" rel="stylesheet">
+    <!-- font-awesome link -->
+    <script src="https://kit.fontawesome.com/378a7ca952.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .btn {
+            position: relative;
+            z-index: 200 !important;
+
+            cursor: pointer;
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 18px;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background-color: rgb(255, 166, 0);
+            z-index: -1;
+            transition: 0.4s all ease-in-out 0.2s;
+        }
+
+        .btn:hover::after {
+
+            top: unset;
+            bottom: 0;
+            height: 90%;
+        }
+
+        @media(max-width:800px) {
+            .centre-circle {
+                display: none;
+            }
+
+            .several-btns {
+                display: none;
+            }
+        }
+
+        /* fixed nav */
+        .nav {
+            z-index: 300;
+        }
+
+        .nav.active {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav.active a {
+            color: #000 !important;
+        }
+
+        /* carousel slider */
+        .carousel-wrapper {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* height: 70vh; */
+            background-color: #fff;
+            z-index: 70;
+        }
+
+        .main-wrapper {
+            /* height: 70vh; */
+            background-color: rgba(219, 212, 212, 0.144);
+            display: flex;
+            z-index: 120;
+            align-items: center;
+            padding: 120px 0;
+        }
+
+        #wrapper {
+            width: 100%;
+            max-width: 964px;
+            position: relative;
+        }
+
+        #carousel {
+            overflow: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        #carousel::-webkit-scrollbar {
+            height: 0;
+        }
+
+        #prev,
+        #next {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            background: white;
+            border: none;
+            padding: 8px;
+            border-radius: 50%;
+            outline: 0;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        #prev {
+            top: 50%;
+            left: 0;
+            transform: translate(50%, -50%);
+            display: none;
+        }
+
+        #next {
+            top: 50%;
+            right: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        #content {
+            display: grid;
+            grid-gap: 16px;
+            grid-auto-flow: column;
+            margin: auto;
+            box-sizing: border-box;
+        }
+
+        #content .item {
+            width: 400px;
+            height: 220px;
+            overflow: hidden;
+            background: white;
+            padding: 10px !important;
+        }
+    </style>
+</head>
+
+<body class="w-screen overflow-x-hidden">
+    <!-- landing page starts here -->
+    <section class="bg-white w-screen flex flex-col" style="height: 110vh;">
+        <div style="background-image: url(../img/emg-1\(5\).jpg);"
+            class="bgimage w-screen bg-center bg-no-repeat bg-cover h-2/3 bg-fixed">
+            <!-- navbar starts here -->
+            <nav class="px-2 sm:px-4 py-2.5 fixed w-screen top-0 left-0 nav">
+                <div class="container flex mx-2 lg:px-[87px] md:px-2 sm:px-2 flex-wrap justify-between items-center">
+                    <a href="#" class="flex items-center">
+                        <img src="../img/endah2-removebg-preview.png" class="mr-3 h-6 sm:h-9" alt="endah Logo">
+                    </a>
+                    <div class="flex">
+
+                        <button data-collapse-toggle="navbar-sticky" type="button"
+                            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            aria-controls="navbar-sticky" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
+                        id="navbar-sticky">
+                        <ul
+                            class="flex flex-col p-4 mt-4 md:rounded-none lg:rounded-none sm:rounded-lg border md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-[#cec7c100] lg:bg-[#cec7c100] bg-none sm:bg-white dark:border-gray-700">
+                            <li>
+                                <a href="#"
+                                    class="block py-2 pr-4 pl-3 text-white hover:text-orange-600 rounded md:bg-transparent md:p-0"
+                                    aria-current="page">Home</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:text-orange-600  md:hover:text-blue-700 md:p-0 ">Category</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:text-orange-600  md:hover:text-blue-700 md:p-0 ">Promo</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:text-orange-600  md:hover:text-blue-700 md:p-0 ">About</a>
+                            </li>
+                            <li>
+                                <a href="tel: 08183745699"
+                                    class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100  md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:text-white md:dark:hover:bg-transparent"><button
+                                        class="py-1 px-2 font-semibold rounded-full border border-slate-900 text-black"
+                                        type="submit">
+                                        Contact me
+                                    </button></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- navbar ends here -->
+        </div>
+        <div class="flex absolute justify-between w-screen mx-12 lg:mx-36 md:mx-20 sm:mx-12 lg:top-96 top-[450px] ">
+            <div class="flex justify-center items-center">
+                <h1 class="text-left font-black lg:text-9xl md:text-7xl text-7xl">Wear the <br> Best</h1>
+                <p
+                    class="text-left font-normal text-slate-400 absolute top-40 left-80 lg:flex md:hidden sm:hidden hidden">
+                    Still, the
+                    second
+                    option
+                    holds
+                    <br>
+                    promise.could make
+                    the
+                    <br> tagline
+                    shortlist
+                    if you
+                    are <br> delivering relaxed
+                </p>
+            </div>
+            <div class="flex-auto flex-col lg:flex md:hidden sm:hidden hidden justify-center items-center">
+                <button class="flex-none w-52 h-24 uppercase font-medium tracking-wider bg-slate-900 text-white"
+                    type="submit">
+                    Buy now
+                </button>
+                <button class="flex-none w-52 h-24 uppercase font-medium tracking-wider bg-black text-white"
+                    type="button">
+                    Add to bag
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- landing page ends here -->
+    <!-- page 2/category starts here -->
+    <section class="lg:m-36 md:m-24 sm:m-20 m-20">
+        <div
+            class="grid lg:grid-cols-2 md:grid-cols-2 gap-y-4 grid-rows-1 gap-x-4 sm:grid-cols-1 relative my-auto items-center">
+            <div style="background-image: url(../img/emg-2.jpg);"
+                class="w-full bg-center bg-no-repeat bg-cover h-96 text-white lg:text-2xl md:text-sm sm:text-sm font-bold flex justify-center items-center">
+                <h2 class="btn">STREET
+                    STYLE</h2>
+            </div>
+            <div class="flex flex-col h-96">
+                <div style=" background-image: url(../img/emg-3.jpg);"
+                    class="bgimage w-full bg-center bg-no-repeat bg-cover h-1/2 text-white  lg:text-2xl md:text-sm sm:text-sm font-bold items-center justify-center flex align-middle ">
+                    <h2 class="btn">FORMAL
+                        BOY</h2>
+
+                </div>
+                <div style="background-image: url(../img/emg-4.jpg);"
+                    class="bgimage w-full bg-center bg-no-repeat bg-cover h-1/2 mt-5 text-white lg:text-2xl md:text-sm sm:text-sm items-center justify-center flex font-bold">
+                    <h2 class="btn">CASUAL BOY</h2>
+                </div>
+            </div>
+            <div class="w-40 h-40 bg-sky-800 rounded-full absolute top-2  text-white text-1xl font-medium items-center justify-center flex align-middle centre-circle"
+                style="left: 43%;"> Be your best</div>
+        </div>
+    </section>
+    <!-- page 2/category ends here -->
+
+    <!-- page 3 starts here -->
+    <section class="lg:m-36 md:m-24 sm:m-20 m-20">
+        <div class="grid lg:grid-cols-3 md:grid-cols-3 grid-rows-1 gap-y-4 gap-x-4 sm:grid-cols-1 my-auto items-center">
+            <!-- grid 1 -->
+            <div class="w-auto h-56 overflow-hidden bg-slate-100 flex flex-col items-center justify-center">
+                <div class="w-20 h-20 rounded-full bg-slate-200 flex flex-col items-center justify-center">
+                    <i class="fa-solid fa-truck text-2xl"></i>
+                </div>
+                <h3 class="text-xl text-black text-center font-medium">Super Fast and Free <br> Delivery</h3>
+            </div>
+            <!-- grid 2/ block part -->
+            <div class="grid lg:grid-cols-1 h-56 md:grid-cols-1 grid-rows-2 gap-y-4 sm:grid-cols-1">
+                <div class="w-auto h-[102px] bg-slate-100 flex items-center justify-start pl-4">
+                    <div class="w-14 h-14 rounded-full bg-slate-200 flex flex-col items-center justify-center">
+                        <i class="fa-sharp fa-solid fa-shield text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl text-black text-left font-medium pl-4">Non-contact <br> Shipping</h3>
+                </div>
+                <div class="w-auto h-[102px] bg-slate-100 flex items-center pl-4 justify-start">
+                    <div class="w-14 h-14 rounded-full bg-slate-200 flex flex-col items-center justify-center">
+                        <i class="fa-solid fa-money-bill text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl text-black text-left font-medium pl-4">Money-Back <br> Guaranteed</h3>
+                </div>
+            </div>
+            <!-- grid 3 -->
+            <div class="w-auto h-56 overflow-hidden bg-slate-100 flex flex-col items-center justify-center">
+                <div class="w-20 h-20 rounded-full bg-slate-200 flex flex-col items-center justify-center">
+                    <i class="fa-sharp fa-solid fa-file-invoice-dollar text-2xl"></i>
+                </div>
+                <h3 class="text-xl text-black text-center font-medium">Super Secure Payment <br> System</h3>
+            </div>
+        </div>
+    </section>
+    <!-- page 3 starts here -->
+
+    <!-- page 4 starts here -->
+    <section class="lg:m-36 md:m-24 sm:m-20 m-20">
+        <div class="flex items-center justify-evenly m-24">
+            <button class="h-10 px-6 py-2 font-semibold rounded-full bg-orange-600 text-white" type="submit">
+                All category
+            </button>
+            <button
+                class="several-btns  px-6 py-2 font-semibold rounded-full hover:text-white hover:bg-orange-600 border border-slate-300 text-black"
+                type="submit">
+                Men product
+            </button>
+            <button
+                class="several-btns px-6 py-2 font-semibold rounded-full hover:text-white hover:bg-orange-600 border border-slate-300 text-black"
+                type="submit">
+                Women Product
+            </button>
+            <button
+                class="several-btns px-6 py-2 font-semibold rounded-full hover:text-white hover:bg-orange-600 border border-slate-300 text-black"
+                type="submit">
+                Accesories
+            </button>
+        </div>
+        <div
+            class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 lg:grid-rows-2 md:grid-rows-3 sm:grid-rows-6 gap-y-8 gap-x-4 my-auto items-center">
+            <!-- grid 1 -->
+            <div class="w-auto overflow-hidden flex flex-col">
+                <div style="background-image: url(../img/emg-5.jpg);"
+                    class="w-full bg-center bg-no-repeat bg-cover h-64">
+                </div>
+                <div class="flex flex-col">
+                    <h3 class="text-2xl leading-loose text-black text-start font-bold">Sepatu Keren Sekali</h3>
+                    <span>$59</span>
+                    <div class="flex mt-2">
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <span class="text-slate-400 ml-2">(1241 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- grid 2 part -->
+            <div class="w-auto overflow-hidden flex flex-col">
+                <div style="background-image: url(../img/emg-6.jpg);"
+                    class="w-full bg-center bg-no-repeat bg-cover h-64">
+                </div>
+                <div class="flex flex-col">
+                    <h3 class="text-2xl leading-loose text-black text-start font-bold">Kaos Ngabers</h3>
+                    <span>$59</span>
+                    <div class="flex mt-2">
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <span class="text-slate-400 ml-2">(1241 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- grid 3 -->
+            <div class="w-auto overflow-hidden flex flex-col">
+                <div style="background-image: url(../img/emg-7.jpg);"
+                    class="w-full bg-center bg-no-repeat bg-cover h-64">
+                </div>
+                <div class="flex flex-col">
+                    <h3 class="text-2xl leading-loose text-black text-start font-bold">Kemeja Super</h3>
+                    <span>$59</span>
+                    <div class="flex mt-2">
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <span class="text-slate-400 ml-2">(1241 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- grid 4 -->
+            <div class="w-auto overflow-hidden flex flex-col">
+                <div style="background-image: url(../img/emg-8.jpg);"
+                    class="w-full bg-center bg-no-repeat bg-cover h-64">
+                </div>
+                <div class="flex flex-col">
+                    <h3 class="text-2xl leading-loose text-black text-start font-bold">Kaos Sista Alim</h3>
+                    <span>$59</span>
+                    <div class="flex mt-2">
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <span class="text-slate-400 ml-2">(1241 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- grid 5 part -->
+            <div class="w-auto overflow-hidden flex flex-col">
+                <div style="background-image: url(../img/emg-9.jpg);"
+                    class="w-full bg-center bg-no-repeat bg-cover h-64">
+                </div>
+                <div class="flex flex-col">
+                    <h3 class="text-2xl leading-loose text-black text-start font-bold">Kaos Putih Keren</h3>
+                    <span>$59</span>
+                    <div class="flex mt-2">
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <span class="text-slate-400 ml-2">(1241 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- grid 6 -->
+            <div class="w-auto overflow-hidden flex flex-col">
+                <div style="background-image: url(../img/emg-10.jpg);"
+                    class="w-full bg-center bg-no-repeat bg-cover h-64">
+                </div>
+                <div class="flex flex-col">
+                    <h3 class="text-2xl leading-loose text-black text-start font-bold">Seregam Idaman</h3>
+                    <span>$59</span>
+                    <div class="flex mt-2">
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <i class="fa-solid fa-star text-orange-600"></i>
+                        <span class="text-slate-400 ml-2">(1241 reviews)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page 4 starts here -->
+
+    <!-- page 5 starts here -->
+    <section class="lg:m-36 md:m-24 sm:m-20 m-20">
+        <div class="flex justify-center flex-col md:flex-col sm:flex-row lg:flex-col">
+            <!-- 1 -->
+            <div class="flex justify-between flex-col md:flex-row sm:flex-col lg:flex-row">
+                <!-- a -->
+                <div class="w-1/2 my-2 mr-3 flex flex-col justify-start">
+                    <h2 class="text-5xl font-black text-black">Bringing You the <br> Elements of Style</h2>
+                </div>
+                <!-- b -->
+                <div class=" w-1/2 my-2 lg:ml-48 sm:ml-0 flex flex-col justify-end text-left">
+                    <h2 class="text-lg font-medium text-slate-400"> Circle back minimize backwards overflow yet <br>
+                        products need
+                        full resourcing and support
+                        from a <br> cross-functional team in order to be built, <br> maintained, and evolved.</h2>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="flex justify-between flex-col md:flex-row sm:flex-col lg:flex-row">
+                <!-- a -->
+                <div class="h-56 w-1/2 my-2 mr-3 overflow-hidden bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center"
+                    style="background-image: url(../img/clothes\ rack.jpg);">
+                </div>
+                <!-- b -->
+                <div class="h-56 w-1/2 my-2 ml-3 overflow-hidden bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center"
+                    style="background-image:url(../img/mike-von-YsiSAp3ccvk-unsplash.jpg) ;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- page 5 ends here -->
+    <!-- page 6/product starts here -->
+    <section class="lg:my-36 md:my-24 sm:my-20 my-20 w-[100%] h-10">
+        <div class="flex justify-between flex-col md:flex-col sm:flex-row lg:flex-col w-auto overflow-y-hidden">
+            <!-- 1 -->
+            <div class="flex justify-between flex-col md:flex-row sm:flex-col lg:flex-row">
+                <!-- a -->
+                <h2 class="text-6xl font-black text-black">Men Product </h2>
+                <!-- b -->
+                <h2 class="text-6xl font-black text-black"> Women Product </h2>
+                <!-- c -->
+                <h2 class="text-6xl font-black text-black"> Accesories</h2>
+
+            </div>
+            <!-- 2 -->
+        </div>
+    </section>
+    <!-- page 6/product ends here -->
+
+    <!-- page7/ review carousel starts here -->
+    <div class="carousel-wrapper">
+        <div class="main-wrapper">
+            <div id="wrapper">
+                <div id="carousel">
+                    <div id="content">
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 2 -->
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 3 -->
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 4 -->
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 5 -->
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 6 -->
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 7 -->
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 8 -->
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 9 -->
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                        <!-- 10 -->
+                        <div class="item flex flex-col align-middle">
+                            <div class="flex justify-between w-96 items-center flex-row h-20">
+                                <div class="flex items-center w-48">
+                                    <img src="../img/art-hauntington-B5PLtlpR7YA-unsplash.jpg"
+                                        class="w-14 h-14 md:h-auto rounded-full mx-auto" alt="">
+                                    <div class="flex flex-col ml-3">
+                                        <h4 class="text-black font-medium">
+                                            Jenny Stroman</h4>
+                                        <span class="text-slate-500 text-sm font-thin">
+                                            June 12, 2022</span>
+                                    </div>
+                                </div>
+                                <div class="flex mr-6">
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                    <i class="fa-solid fa-star text-orange-600"></i>
+                                </div>
+                            </div>
+                            <div class="caption ml-3">
+                                <p class="text-lg font-medium  text-slate-400 ">
+                                    “Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet maxime aut corporis
+                                    veritatis maiores placeat dolorem pariatur nesciunt?”
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="none" d="M0 0h24v24H0V0z" />
+                        <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
+                    </svg>
+                </button>
+                <button id="next">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="none" d="M0 0h24v24H0V0z" />
+                        <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- footer section starts here -->
+    <footer class="bg-black">
+        <div class="footer-content">
+            <nav class="footer-menu">
+                <div class="footer-col">
+                    <div class="item">
+                        <input type="checkbox" id="products">
+                        <div class="col-section">
+                            <label for="products">
+                                <h3 class="text-xl font-bold">Quick Links</h3>
+                            </label>
+                            <ul class="product-list">
+                                <li><a href="#">Category</a></li>
+                                <li><a href="#">Promo</a></li>
+                                <li><a href="#">Men Product</a></li>
+                                <li><a href="#">Women Product</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <div class="item">
+                        <input type="checkbox" id="store">
+                        <div class="col-section">
+                            <label for="store">
+                                <h3 class="text-xl font-bold">Services</h3>
+                            </label>
+                            <ul class="product-list">
+                                <li><a href="#">Men Product</a></li>
+                                <li><a href="#">Women Product</a></li>
+                                <li><a href="#">Accesories</a></li>
+                                <li><a href="#">Promo</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <div class="item">
+                        <input type="checkbox" id="acccount">
+                        <div class="col-section">
+                            <label for="acccount">
+                                <h3 class="text-xl font-bold">Social Media</h3>
+                            </label>
+                            <ul class="product-list">
+                                <li><a href="#">Facebook</a></li>
+                                <li><a href="#">Instagram</a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Youtube</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <div class="item">
+                        <input type="checkbox" id="about">
+                        <div class="col-section">
+                            <label for="about">
+                                <h3 class="text-xl font-bold">About</h3>
+                            </label>
+                            <ul class="product-list">
+                                <li><a href="#">Company</a></li>
+                                <li><a href="#">Career</a></li>
+                                <li><a href="#">Legal</a></li>
+                                <li><a href="#">Help</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <section class="footer-base w-full flex items-center justify-center flex-col">
+                <img src="../img/endahlogo-removebg-preview.png" alt="" class="mb-3">
+                <a href="" class="text-white leading-loose">&copy; Copyright 2022 - Femest Webdev</a>
+            </section>
+        </div>
+    </footer>
+    <!-- footer section ends here -->
+    <!-- page 7/review carousel ends here -->
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="./commerce.js"></script>
+</body>
+
+</html>

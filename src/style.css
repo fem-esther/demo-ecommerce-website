@@ -1,0 +1,161 @@
+/* footer */
+
+a {
+    text-decoration: none;
+    color: #fff;
+    transition: 0.2s ease-in-out;
+}
+
+footer a:hover {
+    transform: translateX(5px);
+}
+
+footer {
+    padding: 100px 0px 20px;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 1.63337;
+    font-weight: 400;
+    /* min-width: 1024px; */
+    overflow: hidden;
+}
+
+.footer-content {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.footer-menu {
+    padding: 21px 20px;
+    overflow: hidden;
+    margin-left: 100px;
+}
+
+.footer-col {
+    width: 25%;
+    float: left;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+h3 {
+    color: #fff;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 6px;
+    margin-top: 0;
+    line-height: 2;
+}
+
+.product-list {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.product-list li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.product-list a {
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+}
+
+
+
+input[type="checkbox"]:checked+.col-section .product-list {
+    transition: transform 300ms ease, -webkit-transform 300ms ease;
+    visibility: visible;
+    position: static;
+    transform: none;
+}
+
+input[type="checkbox"]:checked+.col-section h3::after {
+    transform: rotate(45deg) scale(1.08);
+}
+
+.footer-base {
+    padding-top: 34px;
+    padding-bottom: 21px;
+    color: #888;
+    font-size: 12px;
+}
+
+.footer-more-ways {
+    margin-bottom: 7px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 767px) {
+
+    footer {
+        padding: 0 16px;
+        padding-bottom: 21px;
+    }
+
+    .footer-menu {
+        margin-left: 0px;
+    }
+
+    .footer-col {
+        width: 100%;
+    }
+
+    footer .item {
+        border-bottom: 1px solid #d6d6d6;
+    }
+
+    h3 {
+        padding: 10px 0;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    footer h3::after {
+        content: '+';
+        float: right;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: -2px;
+        margin-right: 8px;
+        transition: transform .3s ease
+    }
+
+    .product-list {
+        visibility: hidden;
+        position: absolute;
+        transform: translateY(-100px);
+        z-index: 1;
+        padding: 5px 0 16px 0;
+    }
+
+    .product-list li {
+        margin: 0;
+    }
+
+    .product-list a {
+        display: block;
+        padding: 6px 14px;
+    }
+
+    .footer-col {
+        overflow: hidden;
+    }
+
+    #carousel {
+        display: none;
+    }
+}
+
+/* footer ends here */
